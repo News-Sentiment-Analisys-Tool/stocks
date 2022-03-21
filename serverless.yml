@@ -21,6 +21,17 @@ functions:
   get-stocks:
     handler: handler.run
     events:
-      - httpApi:
+      - http:
             method: GET
             path: /stock
+            cors:
+              origin: '*'
+              headers:
+                - Access-Control-Allow-Headers
+                - Access-Control-Allow-Origin
+                - Authorization
+                - Content-Type
+                - X-Amz-Date
+                - X-Amz-Security-Token
+                - X-Amz-User-Agent
+                - X-Api-Key

@@ -12,19 +12,24 @@ def run(event, context):
 
     df = ticker.history(start=start, end=end)
 
-    body = df.to_json(orient = 'records')
+    body = df.to_json(orient = 'table')
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(body)
+        "body": json.dumps(json.loads(body)['data']),
+        "headers": {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Methods': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
     }
 
     return response
 
-# run({
-#     'queryStringParameters': {
-#         "start": "2022-03-10",
-#         "end": "2022-03-20",
-#         "code": "PETR4"
-#     }
-# }, {})
+run({
+    'queryStringParameters': {
+        "start": "2022-03-10",
+        "end": "2022-03-20",
+        "code": "PETR4"
+    }
+}, {})
