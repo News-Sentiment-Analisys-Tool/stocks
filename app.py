@@ -1,9 +1,12 @@
 from flask import Flask
 from flask import request
+from flask_cors import CORS, cross_origin
 import json
 from yahooquery import Ticker
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/stock',methods=['GET'])
 def run():
